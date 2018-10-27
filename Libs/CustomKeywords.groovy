@@ -222,6 +222,12 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
          , 	actual)
 }
 
+def static "com.kazurayam.ksbackyard.TestObjectSupport.jsonifyActiveProperties"(
+    	TestObject testObject	) {
+    (new com.kazurayam.ksbackyard.TestObjectSupport()).jsonifyActiveProperties(
+        	testObject)
+}
+
 def static "com.kazurayam.ksbackyard.Assert.assertTrue"(
     	String message	
      , 	Boolean condition	
@@ -300,10 +306,4 @@ def static "com.kazurayam.ksbackyard.Assert.assertEquals"(
         	message
          , 	expected
          , 	actual)
-}
-
-def static "com.kazurayam.ksbackyard.TestObjectSupport.jsonifyActiveProperties"(
-    	TestObject testObject	) {
-    (new com.kazurayam.ksbackyard.TestObjectSupport()).jsonifyActiveProperties(
-        	testObject)
 }
