@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TestCaseEntity>
+   <description></description>
+   <name>TC0_save_image_from_page_to_file</name>
+   <tag></tag>
+   <comment></comment>
+   <testCaseGuid>e01e439b-f140-4126-a433-d525cb1d9c93</testCaseGuid>
+</TestCaseEntity>
