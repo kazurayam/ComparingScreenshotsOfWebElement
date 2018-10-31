@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>TC2_verifyImagesAreSimilar_or_Different(TestObject,TestObject)</name>
+   <name>TC3_verifyImagesAreSimilar_or_Different(TestObject,TestObject)</name>
    <tag></tag>
    <comment></comment>
    <testCaseGuid>c0f9f474-a3de-40ab-a10a-70b9ce9f2207</testCaseGuid>

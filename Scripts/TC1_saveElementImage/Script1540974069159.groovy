@@ -13,7 +13,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
  * take screenshot of the logo graphics <canvas id="hpcanvas"> to save it into file
  */
 Path projectdir = Paths.get(RunConfiguration.getProjectDir())
-Path workdir = projectdir.resolve('tmp/TC0')
+Path workdir = projectdir.resolve('tmp/TC1')
 Files.createDirectories(workdir)
 
 WebUI.openBrowser('')

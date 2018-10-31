@@ -16,7 +16,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
  */
 Path projectdir = Paths.get(RunConfiguration.getProjectDir())
 Path datadir = projectdir.resolve('Data Files/images')
-Path workdir = projectdir.resolve('tmp/TC1')
+Path workdir = projectdir.resolve('tmp/TC2')
 Files.createDirectories(workdir)
 
 WebUI.openBrowser('')
