@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<TestCaseEntity>
-   <description></description>
-   <name>TC2_verify_images_are_similar - Falsey case</name>
-   <tag></tag>
-   <comment></comment>
-   <testCaseGuid>a6ead9ae-e4e3-41b8-bd37-f57198658869</testCaseGuid>
-</TestCaseEntity>

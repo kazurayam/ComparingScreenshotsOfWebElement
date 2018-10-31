@@ -1,4 +1,3 @@
-
 package com.kazurayam.ksbackyard
 
 import java.awt.image.BufferedImage
@@ -14,6 +13,7 @@ import org.openqa.selenium.WebDriver
 import org.openqa.selenium.WebElement
 
 import com.kms.katalon.core.annotation.Keyword
+import com.kms.katalon.core.configuration.RunConfiguration
 import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testobject.TestObject
 import com.kms.katalon.core.webui.driver.DriverFactory
@@ -21,11 +21,10 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 import ru.yandex.qatools.ashot.AShot
 import ru.yandex.qatools.ashot.Screenshot
-import ru.yandex.qatools.ashot.comparison.ImageDiff
-import ru.yandex.qatools.ashot.comparison.ImageDiffer
 import ru.yandex.qatools.ashot.coordinates.WebDriverCoordsProvider
 import ru.yandex.qatools.ashot.shooting.ShootingStrategies
-
+import ru.yandex.qatools.ashot.comparison.ImageDiff
+import ru.yandex.qatools.ashot.comparison.ImageDiffer
 // import com.kazurayam.ksbackyard.test.ashot.AShotMock
 
 /**
@@ -36,6 +35,8 @@ import ru.yandex.qatools.ashot.shooting.ShootingStrategies
  *
  */
 class ScreenshotDriver {
+
+	static Boolean alwaysSaveSnapshots_ = false
 
 	/**
 	 * takes screenshot of the specified WebElement in the target WebPage,
@@ -238,10 +239,10 @@ class ScreenshotDriver {
 			BufferedImage expectedImage,
 			BufferedImage actualImage,
 			Double criteriaPercent) {
-		ImageDifference difference =
+		ImageDifference imgDifference =
 				new ImageDifference(expectedImage, actualImage)
-		difference.setCriteria(criteriaPercent)
-		return difference
+		imgDifference.setCriteria(criteriaPercent)
+		return imgDifference
 	}
 
 	/**
@@ -276,35 +277,6 @@ class ScreenshotDriver {
 		return imgDifference
 	}
 
-	/**
-	 * Compare 2 images, expected one is read from file, actual one is cropped from web page,
-	 * and check if images are SIMILAR enough.
-	 * When failed, the actual image is saved into file of which path is shown in the error message.
-	 * 
-	 * @param expectedImage of java.io.File prepared beforehand using saveElementImage(File) method
-	 * @param actualImage of TestObject which points HTML element in question
-	 * @return true if expectedImage and actualImage are similar enough; difference ratio < criteriaPercent
-	 */
-	@Keyword
-	static Boolean verifyImagesAreSimilar(
-			File expected,
-			TestObject actual,
-			Double criteriaPercent = 5.0,
-			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
-		Path actualImagePath = Paths.get(System.getProperty('user.dir'),
-				'tmp', "ScreenshotDriver_verifyImagesAreSimilar_actual_${getTimestampNow()}.png")
-		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
-		boolean result = imgDifference.imagesAreSimilar()
-		if (!result) {
-			Files.createDirectories(actualImagePath.getParent())
-			ImageIO.write(imgDifference.getActualImage(), "PNG", actualImagePath.toFile())
-		}
-		com.kazurayam.ksbackyard.Assert.assertTrue(
-				"acutual image (saved into ${actualImagePath.toString()}) is not " +
-				"similar enough to ${expected.toString()}",
-				result, flowControl)
-		return result
-	}
 
 	/**
 	 * Compare 2 images, expected one is read from file, actual one is cropped from web page,
@@ -319,41 +291,20 @@ class ScreenshotDriver {
 	static Boolean verifyImagesAreDifferent(
 			File expected,
 			TestObject actual,
-			Double criteriaPercent = 95.0,
+			Double criteriaPercent,
+			Path snapshotsDir,
 			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
-		Path actualImagePath = Paths.get(System.getProperty('user.dir'),
-				'tmp', "ScreenshotDriver_verifyImagesAreDifferent_actual_${getTimestampNow()}.png")
 		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
 		boolean result = imgDifference.imagesAreDifferent()
-		if (!result) {
-			Files.createDirectories(actualImagePath.getParent())
-			ImageIO.write(imgDifference.getActualImage(), "PNG", actualImagePath.toFile())
+		ImageDifferenceSerializer serializer =
+				new ImageDifferenceSerializer(imgDifference, snapshotsDir, 'verifyImagesAreDifferent(File,TestObject)')
+		if (!result || alwaysSaveSnapshots_) {
+			serializer.serialize()
 		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
-				"actual image (saved into ${actualImagePath.toString()}) is not " +
-				"different enough from ${expected.toString()}",
-				result, flowControl)
-		return result
-	}
-
-	/**
-	 * @return timestamp string of now in the format yyyyMMdd_HHmmss_SSS 	
-	 */
-	private static getTimestampNow() {
-		ZonedDateTime now = ZonedDateTime.now()
-		return DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss_SSS").format(now)
-	}
-
-	@Keyword
-	static Boolean verifyImagesAreSimilar(
-			TestObject expected,
-			TestObject actual,
-			Double criteriaPercent = 5.0,
-			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
-		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
-		boolean result = imgDifference.imagesAreSimilar()
-		com.kazurayam.ksbackyard.Assert.assertTrue(
-				"images are expected to be similar but different",
+				"images are expected to be different but are similar," +
+				" difference=${imgDifference.getRatioAsString()}%," +
+				" snapshots were saved in ${snapshotsDir.toString()}}",
 				result, flowControl)
 		return result
 	}
@@ -362,15 +313,133 @@ class ScreenshotDriver {
 	static Boolean verifyImagesAreDifferent(
 			TestObject expected,
 			TestObject actual,
-			Double criteriaPercent = 75.0,
+			Double criteriaPercent,
+			Path snapshotsDir,
 			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
 		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
+		// check if these are different?
 		boolean result = imgDifference.imagesAreDifferent()
+		ImageDifferenceSerializer serializer =
+				new ImageDifferenceSerializer(imgDifference, snapshotsDir, 'verifyImagesAreDifferent(TestObject,TestObject)')
+		if (!result || alwaysSaveSnapshots_) {
+			serializer.serialize()
+		}
 		com.kazurayam.ksbackyard.Assert.assertTrue(
-				"images are expected to be different but similar",
+				"images are expected to be different but similar. " +
+				" difference=${imgDifference.getRatioAsString()}%," +
+				" snapshots were saved in ${snapshotsDir.toString()}",
 				result, flowControl)
 		return result
 	}
+
+	/**
+	 * Compare 2 images, expected one is read from file, actual one is cropped from web page,
+	 * and check if images are SIMILAR enough.
+	 * When failed, the actual image is saved into file of which path is shown in the error message.
+	 *
+	 * @param expectedImage of java.io.File prepared beforehand using saveElementImage(File) method
+	 * @param actualImage of TestObject which points HTML element in question
+	 * @return true if expectedImage and actualImage are similar enough; difference ratio < criteriaPercent
+	 */
+	@Keyword
+	static Boolean verifyImagesAreSimilar(
+			File expected,
+			TestObject actual,
+			Double criteriaPercent,
+			Path snapshotsDir,
+			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
+		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
+		boolean result = imgDifference.imagesAreSimilar()
+		ImageDifferenceSerializer serializer =
+				new ImageDifferenceSerializer(imgDifference, snapshotsDir, 'verifyImagesAreSimilar(File,TestObject)')
+		if (!result || alwaysSaveSnapshots_) {
+			serializer.serialize()
+		}
+		com.kazurayam.ksbackyard.Assert.assertTrue(
+				"images are expected to be similar but are different," +
+				" difference=${imgDifference.getRatioAsString()}%," +
+				" snapshots were saved in ${snapshotsDir.toString()}",
+				result, flowControl)
+		return result
+	}
+
+	@Keyword
+	static Boolean verifyImagesAreSimilar(
+			TestObject expected,
+			TestObject actual,
+			Double criteriaPercent,
+			Path snapshotsDir,
+			FailureHandling flowControl = FailureHandling.CONTINUE_ON_FAILURE) {
+		ImageDifference imgDifference = compareImages(expected, actual, criteriaPercent)
+		// check if these are similar?
+		boolean result = imgDifference.imagesAreSimilar()
+		ImageDifferenceSerializer serializer =
+				new ImageDifferenceSerializer(imgDifference, snapshotsDir, 'verifyImagesAreSimilar(TestObject,TestObject)')
+		if (!result || alwaysSaveSnapshots_) {
+			serializer.serialize()
+		}
+		com.kazurayam.ksbackyard.Assert.assertTrue(
+				"images are expected to be similar but different, " +
+				" difference=${imgDifference.getRatioAsString()}%," +
+				" snapshots were saved in ${snapshotsDir.toString()}",
+				result, flowControl)
+		return result
+	}
+
+
+	/**
+	 * @return timestamp string of now in the format yyyyMMdd_HHmmss
+	 */
+	public static getTimestampNow() {
+		ZonedDateTime now = ZonedDateTime.now()
+		return DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss").format(now)
+	}
+
+
+	/**
+	 * encloses 3 Path objects; expected, actual and diff
+	 * resolves 3 file paths, writes images into files
+	 * 
+	 * @author kazurayam
+	 *
+	 */
+	static class ImageDifferenceSerializer {
+
+		private ImageDifference imgDifference_
+		private Path outputDirectory_
+		private Path expected_
+		private Path actual_
+		private Path diff_
+
+		ImageDifferenceSerializer(ImageDifference imgDifference, Path outputDirectory, String identifier) {
+			imgDifference_ = imgDifference
+			outputDirectory_ = outputDirectory
+			expected_ = outputDirectory.resolve(identifier + ".expected.png")
+			actual_   = outputDirectory.resolve(identifier + ".actual.png")
+			diff_     = outputDirectory.resolve(identifier + ".diff(${imgDifference.getRatioAsString()}).png")
+		}
+
+		Path getExpected() {
+			return expected_
+		}
+
+		Path getActual() {
+			return actual_
+		}
+
+		Path getDiff() {
+			return diff_
+		}
+
+		void serialize() {
+			Files.createDirectories(outputDirectory_)
+			ImageIO.write(imgDifference_.getExpectedImage(), "PNG", expected_.toFile())
+			ImageIO.write(imgDifference_.getActualImage(),   "PNG", actual_.toFile())
+			ImageIO.write(imgDifference_.getDiffImage(),     "PNG", diff_.toFile())
+		}
+	}
+
+
 
 	/**
 	 * accepts 2 BufferedImages as input, compare them, make a difference image,
@@ -383,6 +452,11 @@ class ScreenshotDriver {
 		private BufferedImage diffImage_
 		private Double ratio_ = 0.0        // percentage
 		private Double criteria_ = 1.0     // percentage
+
+		ImageDifference() {
+			expectedImage_ = null
+			actualImage_ = null
+		}
 
 		ImageDifference(BufferedImage expected, BufferedImage actual) {
 			expectedImage_ = expected
@@ -420,7 +494,7 @@ class ScreenshotDriver {
 		}
 
 		/**
-		 * 
+		 *
 		 * @return e.g. 0.23% or 90.0%
 		 */
 		Double getRatio() {
@@ -435,9 +509,9 @@ class ScreenshotDriver {
 		}
 
 		/**
-		 * 
+		 *
 		 * Round up 0.0001 to 0.01
-		 * 
+		 *
 		 * @param diff
 		 * @return
 		 */
@@ -456,7 +530,7 @@ class ScreenshotDriver {
 
 
 		/**
-		 * @return true if the expected image and the actual image pair has 
+		 * @return true if the expected image and the actual image pair has
 		 *         greater difference than the criteria = these are different enough,
 		 *         otherwise false.
 		 */

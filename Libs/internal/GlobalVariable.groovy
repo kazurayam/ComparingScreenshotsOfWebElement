@@ -16,17 +16,23 @@ public class GlobalVariable {
     /**
      * <p></p>
      */
-    public static Object URL
+    public static Object MATERIAL_REPOSITORY
+     
+    /**
+     * <p></p>
+     */
+    public static Object CURRENT_TESTCASE_NAME
      
 
     static {
         def allVariables = [:]        
-        allVariables.put('default', ['URL' : 'https://forum.katalon.com/discussion/9799/visual-testing-in-katalon-studio'])
+        allVariables.put('default', ['MATERIAL_REPOSITORY' : null, 'CURRENT_TESTCASE_NAME' : ''])
         
         String profileName = RunConfiguration.getExecutionProfile()
         
         def selectedVariables = allVariables[profileName]
-        URL = selectedVariables['URL']
+        MATERIAL_REPOSITORY = selectedVariables['MATERIAL_REPOSITORY']
+        CURRENT_TESTCASE_NAME = selectedVariables['CURRENT_TESTCASE_NAME']
         
     }
 }

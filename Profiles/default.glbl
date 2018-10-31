@@ -6,7 +6,12 @@
    <defaultProfile>true</defaultProfile>
    <GlobalVariableEntity>
       <description></description>
-      <initValue>'https://forum.katalon.com/discussion/9799/visual-testing-in-katalon-studio'</initValue>
-      <name>URL</name>
+      <initValue>null</initValue>
+      <name>MATERIAL_REPOSITORY</name>
+   </GlobalVariableEntity>
+   <GlobalVariableEntity>
+      <description></description>
+      <initValue>''</initValue>
+      <name>CURRENT_TESTCASE_NAME</name>
    </GlobalVariableEntity>
 </GlobalVariableEntities>

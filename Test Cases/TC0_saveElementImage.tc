@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>TC3_verify_images_are_different</name>
+   <name>TC0_saveElementImage</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>c0f9f474-a3de-40ab-a10a-70b9ce9f2207</testCaseGuid>
+   <testCaseGuid>e01e439b-f140-4126-a433-d525cb1d9c93</testCaseGuid>
 </TestCaseEntity>

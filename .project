@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>%Users%urayamakazuaki%katalon-workspace%Verifying_ImagesAreSimilar_and_ImagesAreDifferent%verifyImagesAreSimilar.prj</name>
+	<name>C%%Users%qcq0264%katalon-workspace%ComparingScreenshotsOfWebElement%ComparingScreenshotsOfWebElement.prj</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -35,7 +35,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1540643517355</id>
+			<id>0</id>
 			<name></name>
 			<type>10</type>
 			<matcher>
@@ -44,7 +44,25 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1540643517366</id>
+			<id>0</id>
+			<name></name>
+			<type>6</type>
+			<matcher>
+				<id>org.eclipse.core.resources.regexFilterMatcher</id>
+				<arguments>(.*\.svn-base$)|(.*\.png$)|(.*\.log$)|(.*\.xlsx$)|(.*\.xls$)|(.*\.csv$)|(.*\.txt$)</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>0</id>
+			<name></name>
+			<type>10</type>
+			<matcher>
+				<id>org.eclipse.core.resources.regexFilterMatcher</id>
+				<arguments>.*\.svn$</arguments>
+			</matcher>
+		</filter>
+		<filter>
+			<id>0</id>
 			<name></name>
 			<type>6</type>
 			<matcher>

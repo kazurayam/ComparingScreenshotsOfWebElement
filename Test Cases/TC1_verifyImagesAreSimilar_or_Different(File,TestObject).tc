@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TestCaseEntity>
    <description></description>
-   <name>TC6_verify_images_are_different</name>
+   <name>TC1_verifyImagesAreSimilar_or_Different(File,TestObject)</name>
    <tag></tag>
    <comment></comment>
-   <testCaseGuid>d05ac569-0afa-4407-a43f-7641bab44d69</testCaseGuid>
+   <testCaseGuid>2c767e09-6f3d-467f-9787-f2b6f842e820</testCaseGuid>
 </TestCaseEntity>

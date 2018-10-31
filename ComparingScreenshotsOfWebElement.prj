@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project>
    <description></description>
-   <name>verifyImagesAreSimilar</name>
+   <name>ComparingScreenshotsOfWebElement</name>
    <tag></tag>
    <UUID>cc41c4a8-9ec0-44d4-ba24-4e8e03ff8501</UUID>
    <migratedVersion>5.7.0</migratedVersion>
@@ -21,4 +21,5 @@
          </systemFolderConfiguration>
       </systemFolderList>
    </sourceContent>
+   <type>GENERIC</type>
 </Project>
