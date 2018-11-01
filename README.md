@@ -233,6 +233,41 @@ and then
 
 ### 4. TC1_saveElementImage
 
-Open `Test Cases/TC1_saveElementImage` and run it; you will find the current Google Logo is saved in the  *&lt;projectDir&gt;*/`tmp/TC1` diretory. 
+Open `Test Cases/TC1_saveElementImage` and run it. When finished, you will find the screenshot of &lt;div id="lga"&gt; element, which contains the Google Logo graphics, is saved in the  *&lt;projectDir&gt;*/`tmp/TC1` directory.
 
-![logoArea](docs/images/tmp/TC1/logoArea.png]
+![logoArea](docs/images/tmp/TC1/logoArea.png)
+
+### 5. TC2_verifyImagesAreSimilar_or_Different(File,TestObject)
+
+Open `Test Cases/TC2_verifyImagesAreSimilar_or_different(File,TestObject)` and run it. This test case will fail. The log was as follows:
+
+```
+11-01-2018 04:42:58 PM - [FAILED] - Test Cases/TC2_verifyImagesAreSimilar_or_Different(File,TestObject)
+    FAILED because (of) (Stack trace: com.kms.katalon.core.exception.StepFailedException: 
+		images are expected to be similar but are different, difference=99.35%,
+		snapshots were saved in C:\Users\qcq0264\katalon-workspace\ComparingScreenshotsOfWebElement\tmp\TC2\b
+	at com.kms.katalon.core.util.KeywordUtil.markFailed(KeywordUtil.java:15)
+	at com.kms.katalon.core.util.KeywordUtil$markFailed.call(Unknown Source)
+	at org.codehaus.groovy.runtime.callsite.CallSiteArray.defaultCall(CallSiteArray.java:48)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:113)
+	at org.codehaus.groovy.runtime.callsite.AbstractCallSite.call(AbstractCallSite.java:125)
+	at com.kazurayam.ksbackyard.Assert.stepFailed(Assert.groovy:68)
+	at com.kazurayam.ksbackyard.Assert.assertTrue(Assert.groovy:27)
+	at com.kazurayam.ksbackyard.Assert$assertTrue.call(Unknown Source)
+	at com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar(ScreenshotDriver.groovy:316)
+	...
+```
+
+You can find the reason why it failed by looking at the snapshots. See the following snapshots.
+
+The expected image is tmp/TC2/b/verifyImagesAreSimilar(File,TestObject).expected.png
+![expected](docs/images/tmp/TC2/b/verifyImagesAreSimilar%28File,TestObject%29.expected.png)
+
+The actual image is tmp/TC2/b/verifyImagesAreSimilar(File,TestObject).actual.png
+![actual](docs/images/tmp/TC2/b/verifyImagesAreSimilar%28File,TestObject%29.actual.png)
+
+The difference image is
+tmp/TC2/b/verifyImagesAreSimilar(File,TestObject).diff(99.35).png
+![diff](docs/images/tmp/TC2/b/verifyImagesAreSimilar%28File,TestObject%29.diff%2899.35%29.png)
+
+The expected image and actual image is NOT similar, therefore the test case TC2 fails.
