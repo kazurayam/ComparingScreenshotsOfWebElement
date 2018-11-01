@@ -27,15 +27,14 @@ WebUI.openBrowser('')
 WebUI.navigateToUrl('https://www.google.com')
 
 TestObject btnK = findTestObject('Page_Google/input_btnK')
-TestObject logoArea = findTestObject('Page_Google/div_logoArea')
 
 WebUI.verifyElementPresent(btnK, 5, FailureHandling.CONTINUE_ON_FAILURE)
 
-// save screenshot of <div id="lga">
+// save screenshot of Google Logo area
+TestObject logoArea = findTestObject('Page_Google/div_logoArea')
 File file1 = workdir.resolve('logoArea.png').toFile()
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveElementImage'(
 	logoArea,
 	file1)
 
 WebUI.closeBrowser()
-

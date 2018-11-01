@@ -13,7 +13,7 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
 /**
  * TC2
- * 
+ *
  * 1. open Google Search page,
  * 2. take screenshot of the logo graphics <canvas id="hpcanvas"> to save it into file,
  * 3. wait for one second ... graphics may change
@@ -32,17 +32,18 @@ WebUI.openBrowser('')
 WebUI.navigateToUrl('https://www.google.com')
 
 TestObject btnk     = findTestObject('Object Repository/Page_Google/input_btnK')
-TestObject logoArea = findTestObject('Object Repository/Page_Google/div_logoArea')
 
 WebUI.verifyElementPresent(btnk, 10)
 
-com.kazurayam.ksbackyard.ScreenshotDriver.alwaysSaveSnapshots_ = true
+com.kazurayam.ksbackyard.ScreenshotDriver.setForceSnapshots(true)
+
+TestObject logoArea = findTestObject('Object Repository/Page_Google/div_logoArea')
 
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar'(
 	logoArea,
 	logoArea,
 	3.0,
-	workdir.resolve('a'),
+	workdir.resolve('a').toFile(),
 	FailureHandling.CONTINUE_ON_FAILURE)
 
 
@@ -50,14 +51,14 @@ CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar
 	logoArea,
 	btnk,
 	3.0,
-	workdir.resolve('b'),
+	workdir.resolve('b').toFile(),
 	FailureHandling.CONTINUE_ON_FAILURE)
 
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent'(
 	logoArea,
 	logoArea,
 	3.0,
-	workdir.resolve('c'),
+	workdir.resolve('c').toFile(),
 	FailureHandling.CONTINUE_ON_FAILURE)
 
 
@@ -65,7 +66,7 @@ CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDiffere
 	logoArea,
 	btnk,
 	3.0,
-	workdir.resolve('d'),
+	workdir.resolve('d').toFile(),
 	FailureHandling.CONTINUE_ON_FAILURE)
 
 WebUI.closeBrowser()

@@ -30,12 +30,12 @@ WebUI.openBrowser('')
 WebUI.navigateToUrl('https://www.google.com')
 
 TestObject btnK = findTestObject('Object Repository/Page_Google/input_btnK')
-TestObject logoArea = findTestObject('Object Repository/Page_Google/div_logoArea')
 
 WebUI.verifyElementPresent(btnK, 10)
 
-com.kazurayam.ksbackyard.ScreenshotDriver.alwaysSaveSnapshots_ = true
+com.kazurayam.ksbackyard.ScreenshotDriver.setForceSnapshots(true)
 
+TestObject logoArea = findTestObject('Object Repository/Page_Google/div_logoArea')
 File file1 = datadir.resolve('google_logo.png').toFile()
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar'(
 	file1,
@@ -69,6 +69,3 @@ CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDiffere
 	FailureHandling.CONTINUE_ON_FAILURE)
 
 WebUI.closeBrowser()
-
-
-
