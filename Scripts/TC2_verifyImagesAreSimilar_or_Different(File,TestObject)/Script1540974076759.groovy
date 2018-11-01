@@ -41,7 +41,7 @@ CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar
 	file1,
 	logoArea,
 	3.0,
-	workdir.resolve('a'),
+	workdir.resolve('a').toFile(),
 	FailureHandling.CONTINUE_ON_FAILURE)
 
 
@@ -50,14 +50,14 @@ CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar
 	file2,
 	logoArea,
 	3.0,
-	workdir.resolve('b'),
+	workdir.resolve('b').toFile(),
 	FailureHandling.CONTINUE_ON_FAILURE)
 
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent'(
 	file1,
 	logoArea,
 	3.0,
-	workdir.resolve('c'),
+	workdir.resolve('c').toFile(),
 	FailureHandling.CONTINUE_ON_FAILURE)
 
 
@@ -65,7 +65,7 @@ CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDiffere
 	file2,
 	logoArea,
 	3.0,
-	workdir.resolve('d'),
+	workdir.resolve('d').toFile(),
 	FailureHandling.CONTINUE_ON_FAILURE)
 
 WebUI.closeBrowser()

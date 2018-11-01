@@ -1,0 +1,31 @@
+Suite/Test/Step Name,Browser,Description,Start time,End time,Duration,Status
+TS,Firefox 63.0,,2018-11-01 15:46:23,2018-11-01 15:46:40,17.269s,ERROR
+,,,,,,
+Test Cases/TC1_saveElementImage,Firefox 63.0,,2018-11-01 15:46:24,2018-11-01 15:46:37,13.049s,PASSED
+Statement - projectdir = java.nio.file.Paths.get(com.kms.katalon.core.configuration.RunConfiguration.getProjectDir()),Firefox 63.0,,2018-11-01 15:46:24,2018-11-01 15:46:24,0.012s,PASSED
+"Statement - workdir = projectdir.resolve(""tmp/TC1"")",Firefox 63.0,,2018-11-01 15:46:24,2018-11-01 15:46:24,0.016s,PASSED
+Statement - If (java.nio.file.Files.exists(workdir)),Firefox 63.0,,2018-11-01 15:46:24,2018-11-01 15:46:24,0.164s,PASSED
+Statement - java.nio.file.Files.createDirectories(workdir),Firefox 63.0,,2018-11-01 15:46:24,2018-11-01 15:46:24,0.011s,PASSED
+openBrowser,Firefox 63.0,,2018-11-01 15:46:24,2018-11-01 15:46:32,7.621s,PASSED
+navigateToUrl,Firefox 63.0,,2018-11-01 15:46:32,2018-11-01 15:46:34,1.993s,PASSED
+Statement - btnK = com.kms.katalon.core.testobject.ObjectRepository.findTestObject(Page_Google/input_btnK),Firefox 63.0,,2018-11-01 15:46:34,2018-11-01 15:46:34,0.103s,PASSED
+verifyElementPresent,Firefox 63.0,,2018-11-01 15:46:34,2018-11-01 15:46:34,0.176s,PASSED
+Statement - logoArea = com.kms.katalon.core.testobject.ObjectRepository.findTestObject(Page_Google/div_logoArea),Firefox 63.0,,2018-11-01 15:46:34,2018-11-01 15:46:34,0.034s,PASSED
+"Statement - file1 = workdir.resolve(""logoArea.png"").toFile()",Firefox 63.0,,2018-11-01 15:46:34,2018-11-01 15:46:34,0.001s,PASSED
+com.kazurayam.ksbackyard.ScreenshotDriver.saveElementImage,Firefox 63.0,,2018-11-01 15:46:34,2018-11-01 15:46:35,0.971s,PASSED
+closeBrowser,Firefox 63.0,,2018-11-01 15:46:35,2018-11-01 15:46:37,1.457s,PASSED
+,,,,,,
+"Test Cases/TC2_verifyImagesAreSimilar_or_Different(File,TestObject)",Firefox 63.0,,2018-11-01 15:46:37,2018-11-01 15:46:37,0.264s,ERROR
+Statement - projectdir = java.nio.file.Paths.get(com.kms.katalon.core.configuration.RunConfiguration.getProjectDir()),Firefox 63.0,,2018-11-01 15:46:37,2018-11-01 15:46:37,0.002s,PASSED
+"Statement - datadir = projectdir.resolve(""Data Files/images"")",Firefox 63.0,,2018-11-01 15:46:37,2018-11-01 15:46:37,0.002s,PASSED
+"Statement - workdir = projectdir.resolve(""tmp/TC2"")",Firefox 63.0,,2018-11-01 15:46:37,2018-11-01 15:46:37,0.000s,PASSED
+Statement - If (java.nio.file.Files.exists(workdir)),Firefox 63.0,,2018-11-01 15:46:37,2018-11-01 15:46:37,0.011s,PASSED
+Statement - java.nio.file.Files.createDirectories(workdir),Firefox 63.0,,2018-11-01 15:46:37,2018-11-01 15:46:37,0.005s,PASSED
+,,,,,,
+"Test Cases/TC3_verifyImagesAreSimilar_or_Different(TestObject,TestObject)",Firefox 63.0,,2018-11-01 15:46:37,2018-11-01 15:46:40,3.031s,FAILED
+Statement - projectdir = java.nio.file.Paths.get(com.kms.katalon.core.configuration.RunConfiguration.getProjectDir()),Firefox 63.0,,2018-11-01 15:46:37,2018-11-01 15:46:37,0.001s,PASSED
+"Statement - datadir = projectdir.resolve(""Data Files/images"")",Firefox 63.0,,2018-11-01 15:46:37,2018-11-01 15:46:37,0.001s,PASSED
+"Statement - workdir = projectdir.resolve(""tmp/TC3"")",Firefox 63.0,,2018-11-01 15:46:37,2018-11-01 15:46:37,0.001s,PASSED
+Statement - If (java.nio.file.Files.exists(workdir)),Firefox 63.0,,2018-11-01 15:46:37,2018-11-01 15:46:37,0.125s,PASSED
+Statement - java.nio.file.Files.createDirectories(workdir),Firefox 63.0,,2018-11-01 15:46:37,2018-11-01 15:46:37,0.002s,PASSED
+openBrowser,Firefox 63.0,,2018-11-01 15:46:37,2018-11-01 15:46:40,2.643s,FAILED

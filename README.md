@@ -70,7 +70,7 @@ Compare actual screenshot of a HTML element in the target web page against the e
 | :----    | :--------- | :-------- | :---------- |
 | expected | File       | Required  | PNG File to compare HTML element against |
 | actual   | TestObject | Required  | target HTML element in the target web page|
-| criteriaPercent | Double | Required | e.g. 5.0 percent, if the difference of the actual image and the expected image is less than or equal to criteriaPercent, then PASS, otherwise FAILS |
+| criteriaPercent | Double | Required | e.g. 5.0 percent |
 | snapshotDir | File    | Optional  | default to *&lt;projectDir&gt;*/tmp directory. When FAILED, 3 PNG files will be saved into this directory. These are the snapshots of the expected image, the actual image, and the difference image. The snapshots will NOT be saved when PASSED as default. But you can toggle it ON by calling `ScreenshotDriver.setForceSnapshots(true)` |
 | flowControl | [FailureHandling](https://docs.katalon.com/katalon-studio/docs/failure-handling.html) | Optional | default to CONTINUE_ON_FAILURE  |
 
@@ -110,7 +110,7 @@ Compare actual screenshot of a HTML element in the target web page against the e
 | :----    | :--------- | :-------- | :---------- |
 | expected | File       | Required  | PNG File to compare HTML element against |
 | actual   | TestObject | Required  | target HTML element in the target web page|
-| criteriaPercent | Double | Required | e.g. 5.0 percent, if the difference of the actual image and the expected image is greater than criteriaPercent, then PASS, otherwise FAILS |
+| criteriaPercent | Double | Required | e.g. 5.0 percent |
 | snapshotDir | File    | Optional  | default to *&lt;projectDir&gt;*/tmp directory. When FAILED, 3 PNG files will be saved into this directory. These are the snapshots of the expected image, the actual image, and the difference image. The snapshots will NOT be saved when PASSED as default. But you can toggle it ON by calling `ScreenshotDriver.setForceSnapshots(true)` |
 | flowControl | [FailureHandling](https://docs.katalon.com/katalon-studio/docs/failure-handling.html) | Optional | default to CONTINUE_ON_FAILURE  |
 
@@ -138,6 +138,101 @@ CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDiffere
 ```
 
 
+### ScreenshotDriver#verifyImagesAreSimilar(TestObject, TestObject, ...)
+
+#### Description
+
+Compare the screenshot of a HTML element in the target web page as actual one against the screenshot of another HTML element in the same page as expected one. Difference of 2 images are calculated. If the difference is less than or equal to the given criteria, then verifies images are similar.
+
+#### Parameters
+
+| Param    | Param Type | Mandatory | Description |
+| :----    | :--------- | :-------- | :---------- |
+| expected | TestObject | Required  | HTML element in the target web page|
+| actual   | TestObject | Required  | HTML element in the target web page|
+| criteriaPercent | Double | Required | e.g. 5.0 percent |
+| snapshotDir | File    | Optional  | default to *&lt;projectDir&gt;*/tmp directory. When FAILED, 3 PNG files will be saved into this directory. These are the snapshots of the expected image, the actual image, and the difference image. The snapshots will NOT be saved when PASSED as default. But you can toggle it ON by calling `ScreenshotDriver.setForceSnapshots(true)` |
+| flowControl | [FailureHandling](https://docs.katalon.com/katalon-studio/docs/failure-handling.html) | Optional | default to CONTINUE_ON_FAILURE  |
+
+#### Example
+
+- [TC3_verifyImagesAreSimilar_or_Different(TestObject,TestObject](Scripts/TC3_verifyImagesAreSimilar_or_Different(TestObject,TestObject)/Script1540974083248.groovy)
+
+```
+TestObject logoArea = findTestObject('Object Repository/Page_Google/div_logoArea')
+
+CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar'(
+	logoArea,
+	logoArea,
+	3.0,
+	workdir.resolve('a').toFile(),
+	FailureHandling.CONTINUE_ON_FAILURE)
+```
+
+Or you can simplify the above code as follows:
+```
+...
+CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar'(
+	logoArea,
+	logoArea,
+	3.0)
+```
+
+
+### ScreenshotDriver#verifyImagesAreDifferent(TestObject, TestObject, ...)
+
+#### Description
+
+Compare the screenshot of a HTML element in the target web page as actual one against the screenshot of another HTML element in the same page as expected one. Difference of 2 images are calculated. If the difference is greater than the given criteria, then verifies images are different.
+
+#### Parameters
+
+| Param    | Param Type | Mandatory | Description |
+| :----    | :--------- | :-------- | :---------- |
+| expected | TestObject | Required  | HTML element in the target web page|
+| actual   | TestObject | Required  | HTML element in the target web page|
+| criteriaPercent | Double | Required | e.g. 5.0 percent |
+| snapshotDir | File    | Optional  | default to *&lt;projectDir&gt;*/tmp directory. When FAILED, 3 PNG files will be saved into this directory. These are the snapshots of the expected image, the actual image, and the difference image. The snapshots will NOT be saved when PASSED as default. But you can toggle it ON by calling `ScreenshotDriver.setForceSnapshots(true)` |
+| flowControl | [FailureHandling](https://docs.katalon.com/katalon-studio/docs/failure-handling.html) | Optional | default to CONTINUE_ON_FAILURE  |
+
+#### Example
+
+- [TC3_verifyImagesAreSimilar_or_Different(TestObject,TestObject](Scripts/TC3_verifyImagesAreSimilar_or_Different(TestObject,TestObject)/Script1540974083248.groovy)
+
+```
+TestObject btnK = findTestObject('Object Repository/Page_Google/input_btnK')
+
+TestObject logoArea = findTestObject('Object Repository/Page_Google/div_logoArea')
+
+CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent'(
+	logoArea,
+	btnK,
+	3.0,
+	workdir.resolve('a').toFile(),
+	FailureHandling.CONTINUE_ON_FAILURE)
+```
+
+Or you can simplify the above code as follows:
+```
+...
+CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar'(
+	logoArea,
+	btnK,
+	3.0)
+```
+
 
 
 ## How to run the demo
+
+1. download the zip file of this project from [Realses](https://github.com/kazurayam/ComparingScreenshotsOfWebElement/releases) page
+2. unzip it
+3. open the project with your Katalon studio
+
+and then
+
+### 4. TC1_saveElementImage
+
+Open `Test Cases/TC1_saveElementImage` and run it; you will find the current Google Logo is saved in the  *&lt;projectDir&gt;*/`tmp/TC1` diretory. 
+
+![logoArea](docs/images/tmp/TC1/logoArea.png]

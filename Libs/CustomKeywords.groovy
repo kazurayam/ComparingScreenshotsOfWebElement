@@ -9,11 +9,7 @@ import java.io.File
 
 import java.lang.Integer
 
-import org.openqa.selenium.WebDriver
-
 import java.lang.Double
-
-import java.nio.file.Path
 
 import com.kms.katalon.core.model.FailureHandling
 
@@ -22,6 +18,10 @@ import java.lang.String
 import java.lang.Boolean
 
 import java.lang.Number
+
+import org.openqa.selenium.WebDriver
+
+import org.openqa.selenium.WebElement
 
 
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeElementImage"(
@@ -52,51 +52,27 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
          , 	timeout)
 }
 
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage"(
-    	WebDriver webDriver	
-     , 	File file	
-     , 	Integer timeout	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePage(
-        	webDriver
-         , 	file
-         , 	timeout)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
-    	File expected	
-     , 	TestObject actual	
-     , 	Double criteriaPercent	
-     , 	Path snapshotsDir	
-     , 	FailureHandling flowControl	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
-        	expected
-         , 	actual
-         , 	criteriaPercent
-         , 	snapshotsDir
-         , 	flowControl)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
-    	TestObject expected	
-     , 	TestObject actual	
-     , 	Double criteriaPercent	
-     , 	Path snapshotsDir	
-     , 	FailureHandling flowControl	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
-        	expected
-         , 	actual
-         , 	criteriaPercent
-         , 	snapshotsDir
-         , 	flowControl)
-}
-
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar"(
     	File expected	
      , 	TestObject actual	
      , 	Double criteriaPercent	
-     , 	Path snapshotsDir	
+     , 	File snapshotsDir	
      , 	FailureHandling flowControl	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreSimilar(
+        	expected
+         , 	actual
+         , 	criteriaPercent
+         , 	snapshotsDir
+         , 	flowControl)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
+    	File expected	
+     , 	TestObject actual	
+     , 	Double criteriaPercent	
+     , 	File snapshotsDir	
+     , 	FailureHandling flowControl	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
         	expected
          , 	actual
          , 	criteriaPercent
@@ -108,9 +84,23 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar"(
     	TestObject expected	
      , 	TestObject actual	
      , 	Double criteriaPercent	
-     , 	Path snapshotsDir	
+     , 	File snapshotsDir	
      , 	FailureHandling flowControl	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreSimilar(
+        	expected
+         , 	actual
+         , 	criteriaPercent
+         , 	snapshotsDir
+         , 	flowControl)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
+    	TestObject expected	
+     , 	TestObject actual	
+     , 	Double criteriaPercent	
+     , 	File snapshotsDir	
+     , 	FailureHandling flowControl	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
         	expected
          , 	actual
          , 	criteriaPercent
@@ -128,32 +118,12 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.saveEntirePageImage"(
         	file)
 }
 
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.takeEntirePage"(
-    	WebDriver webDriver	
-     , 	File file	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).takeEntirePage(
-        	webDriver
-         , 	file)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar"(
     	File expected	
      , 	TestObject actual	
      , 	Double criteriaPercent	
-     , 	Path snapshotsDir	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
-        	expected
-         , 	actual
-         , 	criteriaPercent
-         , 	snapshotsDir)
-}
-
-def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
-    	TestObject expected	
-     , 	TestObject actual	
-     , 	Double criteriaPercent	
-     , 	Path snapshotsDir	) {
-    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
+     , 	File snapshotsDir	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreSimilar(
         	expected
          , 	actual
          , 	criteriaPercent
@@ -163,8 +133,40 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar"(
     	File expected	
      , 	TestObject actual	
+     , 	Double criteriaPercent	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreSimilar(
+        	expected
+         , 	actual
+         , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
+    	File expected	
+     , 	TestObject actual	
      , 	Double criteriaPercent	
-     , 	Path snapshotsDir	) {
+     , 	File snapshotsDir	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
+        	expected
+         , 	actual
+         , 	criteriaPercent
+         , 	snapshotsDir)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
+    	File expected	
+     , 	TestObject actual	
+     , 	Double criteriaPercent	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
+        	expected
+         , 	actual
+         , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar"(
+    	TestObject expected	
+     , 	TestObject actual	
+     , 	Double criteriaPercent	
+     , 	File snapshotsDir	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreSimilar(
         	expected
          , 	actual
@@ -175,19 +177,33 @@ def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar"(
 def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar"(
     	TestObject expected	
      , 	TestObject actual	
-     , 	Double criteriaPercent	
-     , 	Path snapshotsDir	) {
+     , 	Double criteriaPercent	) {
     (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreSimilar(
+        	expected
+         , 	actual
+         , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
+    	TestObject expected	
+     , 	TestObject actual	
+     , 	Double criteriaPercent	
+     , 	File snapshotsDir	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
         	expected
          , 	actual
          , 	criteriaPercent
          , 	snapshotsDir)
 }
 
-def static "com.kazurayam.ksbackyard.TestObjectSupport.jsonifyActiveProperties"(
-    	TestObject testObject	) {
-    (new com.kazurayam.ksbackyard.TestObjectSupport()).jsonifyActiveProperties(
-        	testObject)
+def static "com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent"(
+    	TestObject expected	
+     , 	TestObject actual	
+     , 	Double criteriaPercent	) {
+    (new com.kazurayam.ksbackyard.ScreenshotDriver()).verifyImagesAreDifferent(
+        	expected
+         , 	actual
+         , 	criteriaPercent)
 }
 
 def static "com.kazurayam.ksbackyard.Assert.assertTrue"(
@@ -268,4 +284,114 @@ def static "com.kazurayam.ksbackyard.Assert.assertEquals"(
         	message
          , 	expected
          , 	actual)
+}
+
+def static "com.kazurayam.ksbackyard.RunConfigurationWrapper.getProjectDir"() {
+    (new com.kazurayam.ksbackyard.RunConfigurationWrapper()).getProjectDir()
+}
+
+def static "com.kazurayam.ksbackyard.RunConfigurationWrapper.resolveAgainstProjectDir"(
+    	String pathString	) {
+    (new com.kazurayam.ksbackyard.RunConfigurationWrapper()).resolveAgainstProjectDir(
+        	pathString)
+}
+
+def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoInMotion"(
+    	WebDriver driver	
+     , 	WebElement video	
+     , 	WebElement playButton	
+     , 	Integer gapTimeSecs	
+     , 	Double criteriaPercent	) {
+    (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoInMotion(
+        	driver
+         , 	video
+         , 	playButton
+         , 	gapTimeSecs
+         , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoInMotion"(
+    	TestObject video	
+     , 	TestObject playButton	
+     , 	Integer gapTimeSecs	
+     , 	Double criteriaPercent	) {
+    (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoInMotion(
+        	video
+         , 	playButton
+         , 	gapTimeSecs
+         , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoStartsStill"(
+    	WebDriver driver	
+     , 	WebElement video	
+     , 	Integer gapTimeSecs	
+     , 	Double criteriaPercent	) {
+    (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoStartsStill(
+        	driver
+         , 	video
+         , 	gapTimeSecs
+         , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoStartsStill"(
+    	TestObject video	
+     , 	Integer gapTimeSecs	
+     , 	Double criteriaPercent	) {
+    (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoStartsStill(
+        	video
+         , 	gapTimeSecs
+         , 	criteriaPercent)
+}
+
+def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoStartsStill"(
+    	WebDriver driver	
+     , 	WebElement video	
+     , 	Integer gapTimeSecs	) {
+    (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoStartsStill(
+        	driver
+         , 	video
+         , 	gapTimeSecs)
+}
+
+def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoStartsStill"(
+    	WebDriver driver	
+     , 	WebElement video	) {
+    (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoStartsStill(
+        	driver
+         , 	video)
+}
+
+def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoStartsStill"(
+    	TestObject video	
+     , 	Integer gapTimeSecs	) {
+    (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoStartsStill(
+        	video
+         , 	gapTimeSecs)
+}
+
+def static "com.kazurayam.ksbackyard.YouTubeVideoVerifier.verifyVideoStartsStill"(
+    	TestObject video	) {
+    (new com.kazurayam.ksbackyard.YouTubeVideoVerifier()).verifyVideoStartsStill(
+        	video)
+}
+
+def static "com.kazurayam.ksbackyard.TestObjectSupport.jsonifyActiveProperties"(
+    	TestObject testObject	) {
+    (new com.kazurayam.ksbackyard.TestObjectSupport()).jsonifyActiveProperties(
+        	testObject)
+}
+
+def static "com.kazurayam.ksbackyard.URLParser.queryParameters"(
+    	String urlString	) {
+    (new com.kazurayam.ksbackyard.URLParser()).queryParameters(
+        	urlString)
+}
+
+def static "com.kazurayam.ksbackyard.QuietBrowser.openBrowser"() {
+    (new com.kazurayam.ksbackyard.QuietBrowser()).openBrowser()
+}
+
+def static "com.kazurayam.ksbackyard.QuietBrowser.getProxyInformation"() {
+    (new com.kazurayam.ksbackyard.QuietBrowser()).getProxyInformation()
 }
