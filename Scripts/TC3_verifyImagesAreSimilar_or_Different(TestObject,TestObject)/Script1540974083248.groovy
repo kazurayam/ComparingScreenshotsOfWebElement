@@ -4,7 +4,10 @@ import java.nio.file.Files as Files
 import java.nio.file.Path as Path
 import java.nio.file.Paths as Paths
 
+import org.apache.commons.io.FileUtils
+
 import com.kms.katalon.core.configuration.RunConfiguration as RunConfiguration
+import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
@@ -19,33 +22,50 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 Path projectdir = Paths.get(RunConfiguration.getProjectDir())
 Path datadir = projectdir.resolve('Data Files/images')
 Path workdir = projectdir.resolve('tmp/TC3')
+if (Files.exists(workdir)) {
+	FileUtils.deleteDirectory(workdir.toFile())
+}
 Files.createDirectories(workdir)
 
 WebUI.openBrowser('')
 
 WebUI.navigateToUrl('https://www.google.com')
 
-TestObject hpcanvas = findTestObject('Object Repository/Page_Google/canvas_hpcanvas')
 TestObject btnk     = findTestObject('Object Repository/Page_Google/input_btnK')
+TestObject logoArea = findTestObject('Object Repository/Page_Google/div_logoArea')
 
-WebUI.verifyElementPresent(hpcanvas, 10)
+WebUI.verifyElementPresent(btnk, 10)
 
 com.kazurayam.ksbackyard.ScreenshotDriver.alwaysSaveSnapshots_ = true
 
-// check if the logo image in Google Serach is similar to a file as expected
-WebUI.delay(1)
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar'(
-	hpcanvas,
-	hpcanvas,
+	logoArea,
+	logoArea,
 	3.0,
-	workdir.resolve('a'))
+	workdir.resolve('a'),
+	FailureHandling.CONTINUE_ON_FAILURE)
 
-WebUI.delay(1)
 
-CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent'(
-	hpcanvas,
+CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreSimilar'(
+	logoArea,
 	btnk,
 	3.0,
-	workdir.resolve('b'))
+	workdir.resolve('b'),
+	FailureHandling.CONTINUE_ON_FAILURE)
+
+CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent'(
+	logoArea,
+	logoArea,
+	3.0,
+	workdir.resolve('c'),
+	FailureHandling.CONTINUE_ON_FAILURE)
+
+
+CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.verifyImagesAreDifferent'(
+	logoArea,
+	btnk,
+	3.0,
+	workdir.resolve('d'),
+	FailureHandling.CONTINUE_ON_FAILURE)
 
 WebUI.closeBrowser()

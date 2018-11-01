@@ -4,7 +4,10 @@ import java.nio.file.Files as Files
 import java.nio.file.Path as Path
 import java.nio.file.Paths as Paths
 
+import org.apache.commons.io.FileUtils
+
 import com.kms.katalon.core.configuration.RunConfiguration as RunConfiguration
+import com.kms.katalon.core.model.FailureHandling
 import com.kms.katalon.core.testobject.TestObject as TestObject
 import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 
@@ -14,29 +17,25 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
  */
 Path projectdir = Paths.get(RunConfiguration.getProjectDir())
 Path workdir = projectdir.resolve('tmp/TC1')
+if (Files.exists(workdir)) {
+	FileUtils.deleteDirectory(workdir.toFile())
+}
 Files.createDirectories(workdir)
 
 WebUI.openBrowser('')
 
 WebUI.navigateToUrl('https://www.google.com')
 
-TestObject hpcanvas = findTestObject('Object Repository/Page_Google/canvas_hpcanvas')
+TestObject btnK = findTestObject('Page_Google/input_btnK')
+TestObject logoArea = findTestObject('Page_Google/div_logoArea')
 
-WebUI.verifyElementPresent(hpcanvas, 10)
+WebUI.verifyElementPresent(btnK, 5, FailureHandling.CONTINUE_ON_FAILURE)
 
-// save screenshot of <canvas id="hpcanvas">
-WebUI.delay(1)
-File file1 = workdir.resolve('hpcanvas1.png').toFile()
+// save screenshot of <div id="lga">
+File file1 = workdir.resolve('logoArea.png').toFile()
 CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveElementImage'(
-	hpcanvas,
+	logoArea,
 	file1)
-
-// one more time
-WebUI.delay(1)
-File file2 = workdir.resolve('hpcanvas2.png')
-CustomKeywords.'com.kazurayam.ksbackyard.ScreenshotDriver.saveElementImage'(
-	hpcanvas,
-	file2)
 
 WebUI.closeBrowser()
 
