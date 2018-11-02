@@ -243,7 +243,7 @@ Open `Test Cases/TC2_verifyImagesAreSimilar_or_different(File,TestObject)` and r
 
 ```
 11-01-2018 04:42:58 PM - [FAILED] - Test Cases/TC2_verifyImagesAreSimilar_or_Different(File,TestObject)
-    FAILED because (of) (Stack trace: com.kms.katalon.core.exception.StepFailedException: 
+    FAILED because (of) (Stack trace: com.kms.katalon.core.exception.StepFailedException:
 		images are expected to be similar but are different, difference=99.35%,
 		snapshots were saved in C:\Users\qcq0264\katalon-workspace\ComparingScreenshotsOfWebElement\tmp\TC2\b
 	at com.kms.katalon.core.util.KeywordUtil.markFailed(KeywordUtil.java:15)
@@ -271,3 +271,14 @@ tmp/TC2/b/verifyImagesAreSimilar(File,TestObject).diff(99.35).png
 ![diff](docs/images/tmp/TC2/b/verifyImagesAreSimilar%28File,TestObject%29.diff%2899.35%29.png)
 
 The expected image and actual image is NOT similar, therefore the test case TC2 fails.
+
+
+## How to make those Custom Keywords operational in your Katalon projectDir
+
+1. import the jar file of aShot into your Katalon Studio Project. You can download the jar at [Maven Repository](https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot/1.5.4). Or you can reuse the jar [bundled in this project](https://github.com/kazurayam/ComparingScreenshotsOfWebElement/tree/master/Drivers). See Katalon Docs [External Library](https://docs.katalon.com/katalon-studio/docs/external-libraries.html) for operation.
+2. Using Katalon Studio GUI, create 2 Groovy class files in the Keywords folder, and copy&paste the source code from this project:
+    - [Keywords/com/kazurayam/ksbackyard/Assert](Keywords/com/kazurayam/ksbackyard/Assert.groovy)
+    - [Keywords/com/kazurayam/ksbackyard/ScreenshotDriver](Keywords/com/kazurayam/ksbackyard/ScreenshotDriver.groovy)
+3. Now you can create your test case. See the following sample codes.
+    - [Test Cases/TC1_saveElementImage](Scripts/TC1_saveElementImage/Script1540974069159.groovy)
+    - [Test Cases/TC2_verifyImagesAreSimilar_or_Different(File,TestObject)](Scripts\TC2_verifyImagesAreSimilar_or_Different%28File,TestObject%29)
