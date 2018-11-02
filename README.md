@@ -273,7 +273,7 @@ tmp/TC2/b/verifyImagesAreSimilar(File,TestObject).diff(99.35).png
 The expected image and actual image is NOT similar, therefore the test case TC2 fails.
 
 
-## How to make those Custom Keywords operational in your Katalon projectDir
+## How to make those Custom Keywords operational in your Katalon project
 
 1. import the jar file of aShot into your Katalon Studio Project. You can download the jar at [Maven Repository](https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot/1.5.4). Or you can reuse the jar [bundled in this project](https://github.com/kazurayam/ComparingScreenshotsOfWebElement/tree/master/Drivers). See Katalon Docs [External Library](https://docs.katalon.com/katalon-studio/docs/external-libraries.html) for operation.
 2. Using Katalon Studio GUI, create 2 Groovy class files in the Keywords folder, and copy&paste the source code from this project:
