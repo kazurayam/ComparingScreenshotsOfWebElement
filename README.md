@@ -281,4 +281,4 @@ The expected image and actual image is NOT similar, therefore the test case TC2 
     - [Keywords/com/kazurayam/ksbackyard/ScreenshotDriver](Keywords/com/kazurayam/ksbackyard/ScreenshotDriver.groovy)
 3. Now you can create your test case. See the following sample codes.
     - [Test Cases/TC1_saveElementImage](Scripts/TC1_saveElementImage/Script1540974069159.groovy)
-    - [Test Cases/TC2_verifyImagesAreSimilar_or_Different(File,TestObject)](Scripts/TC2_verifyImagesAreSimilar_or_Different%28File,TestObject%29)
+    - [Test Cases/TC2_verifyImagesAreSimilar_or_Different(File,TestObject)](Scripts/TC2_verifyImagesAreSimilar_or_Different%28File,TestObject%29/Script1540974076759.groovy)
