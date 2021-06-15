@@ -240,7 +240,7 @@ class ScreenshotDriver {
 	 * @param BufferedImage expectedImage
 	 * @param BufferedImage actualImage
 	 * @param Double criteriaPercentage, e.g. 90.0%
-	 * @return ImageDifference object which represents how much different the input 2 images are
+	 * @return ImageDifference object which represents how much different the 2 images are
 	 */
 	static ImageDifference compareImages(
 			BufferedImage expectedImage,
@@ -251,6 +251,23 @@ class ScreenshotDriver {
 				new ImageDifference(expectedImage, actualImage)
 		imgDifference.setCriteria(criteriaPercent)
 		return imgDifference
+	}
+	
+	/**
+	 * compare 2 files as images, calculate the magnitude of differenece between the tow
+	 * 
+	 * @param expected File, can be PNG, JPEG, GIF etc that Java's ImageIO() can read
+	 * @param actual File
+	 * @param criteriaPercent
+	 * @return ImageDifference object which represents how much different the 2 images are
+	 */
+	static ImageDifference compareImages(
+			File expected,
+			File actual,
+			Double criteriaPercent) {
+		BufferedImage exp = ImageIO.read(expected)
+		BufferedImage act = ImageIO.read(actual)
+		return compareImages(exp, act, criteriaPercent)
 	}
 
 	/**

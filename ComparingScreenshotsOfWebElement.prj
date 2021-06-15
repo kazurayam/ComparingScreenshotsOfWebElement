@@ -4,8 +4,9 @@
    <name>ComparingScreenshotsOfWebElement</name>
    <tag></tag>
    <UUID>cc41c4a8-9ec0-44d4-ba24-4e8e03ff8501</UUID>
-   <migratedVersion>5.7.0</migratedVersion>
+   <migratedVersion>5.9.0</migratedVersion>
    <pageLoadTimeout>0</pageLoadTimeout>
+   <projectFileLocation>/Users/kazuakiurayama/katalon-workspace/ComparingScreenshotsOfWebElement/ComparingScreenshotsOfWebElement.prj</projectFileLocation>
    <sourceContent>
       <sourceFolderList>
          <sourceFolderConfiguration>
@@ -18,6 +19,9 @@
          </systemFolderConfiguration>
          <systemFolderConfiguration>
             <url>Include/features</url>
+         </systemFolderConfiguration>
+         <systemFolderConfiguration>
+            <url>Include/config</url>
          </systemFolderConfiguration>
       </systemFolderList>
    </sourceContent>
